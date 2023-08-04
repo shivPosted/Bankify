@@ -94,6 +94,9 @@ const now = new Date();
 //TIMER
 const timer = document.querySelector(".timer");
 
+const helpOpenButton = document.querySelector(".help-open");
+const helpCloseButton = document.querySelector(".help-close");
+const helpMsg = document.querySelector(".help");
 //Date
 // Functions
 
@@ -217,6 +220,7 @@ const logout = function () {
   document.body.classList.remove(".a-login");
   logoutConfirmation.classList.add("hidden");
   logoutOverlay.classList.add("hidden");
+  helpOpenButton.classList.remove("hidden");
 };
 const closeLogoutWindow = function () {
   logoutConfirmation.classList.add("hidden");
@@ -290,7 +294,8 @@ loginButton.addEventListener("click", function (e) {
     loginPage.classList.add("hidden");
     displayUserData.classList.remove("hidden");
     loginUserName.value = loginPIN.value = "";
-
+    hideHelp();
+    helpOpenButton.classList.add("hidden");
     //display welcome message
     welcomeMessage.textContent = `Welcome back, ${
       currentAccount.owner.split(" ")[0]
@@ -404,6 +409,21 @@ sortTransactions.addEventListener("click", function () {
     isSorted = false;
   }
 });
+
+const showHelp = function () {
+  helpOpenButton.classList.add("hidden");
+  helpCloseButton.classList.remove("hidden");
+  helpMsg.style.opacity = "100";
+};
+const hideHelp = function () {
+  helpCloseButton.classList.add("hidden");
+  helpOpenButton.classList.remove("hidden");
+  helpMsg.style.opacity = "0";
+};
+
+helpOpenButton.addEventListener("click", showHelp);
+
+helpCloseButton.addEventListener("click", hideHelp);
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
